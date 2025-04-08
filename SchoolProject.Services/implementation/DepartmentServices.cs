@@ -19,8 +19,9 @@ namespace SchoolProject.Services.implementation
         {
             this.departmentRepo = departmentRepo;
         }
-        public async Task<Department> GetDepartmentByIdAcync(int id)
+        public async Task<Department> GetDepartmentByIdAcync(int? id)
         {
+           
             var department = await departmentRepo.GetTableNoTracking()
                 .Include(d => d.Instructor)
                 .Include(d => d.Instructors)

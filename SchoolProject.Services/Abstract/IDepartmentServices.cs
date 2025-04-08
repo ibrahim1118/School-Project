@@ -9,6 +9,6 @@ namespace SchoolProject.Services.Abstract
 {
     public interface IDepartmentServices
     {
-        public Task<Department> GetDepartmentByIdAcync(int id);
+        public Task<Department> GetDepartmentByIdAcync(int? id);
     }
 }

@@ -1,5 +1,7 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using SchoolProject.Data.Entites;
+using SchoolProject.Data.IdentityEntites;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace SchoolProject.infrastructure.Data
 {
-    public class ApplactionDbContext : DbContext
+    public class ApplactionDbContext : IdentityDbContext<AppUser>
     {
         public ApplactionDbContext()
         {

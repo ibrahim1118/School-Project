@@ -8,6 +8,8 @@ using SchoolProject.Core.MiddelWare;
 using Microsoft.AspNetCore.Localization;
 using System.Globalization;
 using Microsoft.Extensions.Options;
+using SchoolProject.Data.IdentityEntites;
+using Microsoft.AspNetCore.Identity;
 
 
 namespace SchoolProject.API
@@ -30,6 +32,9 @@ namespace SchoolProject.API
             builder.Services.AddInfrastructureDepdndencies(); 
             builder.Services.AddServicesDependencies();
             builder.Services.AddCoresDependencies();
+            builder.Services.AddIdentity<AppUser, IdentityRole>()
+                .AddEntityFrameworkStores<ApplactionDbContext>()
+                .AddDefaultTokenProviders(); 
 
             #region Localization
             builder.Services.AddControllersWithViews();

@@ -20,17 +20,24 @@ namespace SchoolProject.Core.Feature.Students.Commands.Handler
         private readonly IStudentService studentService;
         private readonly IMapper mapper;
         private readonly IStringLocalizer<SharedResources> _stingLocalizer;
+        private readonly IDepartmentServices departmentServices;
 
         public StudentCommandHandler(IStudentService studentService ,
             IMapper mapper , 
-            IStringLocalizer<SharedResources> stingLocalizer)
+            IStringLocalizer<SharedResources> stingLocalizer  , IDepartmentServices departmentServices)
         {
             this.studentService = studentService;
             this.mapper = mapper;
-            _stingLocalizer = stingLocalizer; 
+            _stingLocalizer = stingLocalizer;
+            this.departmentServices = departmentServices;
         }
         public async Task<Response<string>> Handle(AddStudentCommand request, CancellationToken cancellationToken)
         {
+            var department = await departmentServices.GetDepartmentByIdAcync(request.DID); 
+            if (department is null)
+            {
+                return NotFound<string>($"NO Department with id {request.DID}"); 
+            }
             var student = mapper.Map<Student>(request); 
             var res = await studentService.AddStudentAsync(student);
             if (res == "Added")
